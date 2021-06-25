@@ -50,7 +50,9 @@ export default function Navbar() {
         <Toolbar style={{ height: "100%" }}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <Typography variant="h5">POD GOLCOWEM</Typography>
+              <NavLink to="/">
+                <Typography variant="h5">POD GOLCOWEM</Typography>
+              </NavLink>
             </Grid>
             <Grid item>
               <Hidden mdDown>

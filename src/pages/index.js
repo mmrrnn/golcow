@@ -3,7 +3,7 @@ import * as React from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-import Hero from '../components/Hero';
+import PrimaryHero from '../components/Hero/PrimaryHero';
 import TopSection from '../components/TopSection';
 import DoubleSection from "../components/DoubleSection"
 import BottomSection from "../components/BottomSection"
@@ -11,7 +11,7 @@ import BottomSection from "../components/BottomSection"
 const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
-    <Hero />
+    <PrimaryHero />
     <TopSection />
     <DoubleSection />
     <BottomSection />

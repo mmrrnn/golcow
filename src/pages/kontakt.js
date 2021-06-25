@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Layout from "../components/layout"
-import SmallHero from '../components/SmallHero';
+import SecondaryHero from '../components/Hero/SecondaryHero';
 import Map from '../components/Map';
 
 function Kontakt() {
   return (
     <Layout>
-      <SmallHero title="Kontakt" />
+      <SecondaryHero title="Kontakt" />
       <Map />
     </Layout>
   )

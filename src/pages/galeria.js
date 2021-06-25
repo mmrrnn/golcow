@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Layout from "../components/layout"
-import SmallHero from '../components/SmallHero';
+import SecondaryHero from '../components/Hero/SecondaryHero';
 import Gallery from '../components/Gallery';
 
 function Galeria() {
   return (
     <Layout>
-      <SmallHero title="Galeria" />
+      <SecondaryHero title="Galeria" />
       <Gallery />
     </Layout>
   )

@@ -43,7 +43,7 @@ function Reservation() {
 
   return (
     <ReservationContainer>
-      <Typography variant={isSmall ? 'h3' : 'h2'}>Sprawdz dostepnosc</Typography>
+      <Typography variant={isSmall ? 'h3' : 'h2'}>Sprawdź dostępność</Typography>
       <ReservationBox>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container justify="space-around">
