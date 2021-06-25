@@ -1,29 +1,29 @@
 import {
   AppBar,
   Button,
-  Grid, Hidden, IconButton,
+  Grid,
+  Hidden,
+  IconButton,
+  Popover,
   Toolbar,
-  Typography
-} from '@material-ui/core';
-import {
-  Menu as MenuIcon
-} from '@material-ui/icons';
-import { Link } from 'gatsby';
-import * as React from 'react';
-import styled from 'styled-components';
+  Typography,
+} from "@material-ui/core"
+import { Menu as MenuIcon } from "@material-ui/icons"
+import { Link } from "gatsby"
+import * as React from "react"
+import styled from "styled-components"
 
-// import Logo from '../images/mountain.svg';
-
-// const LogoImg = styled.img`
-//     height: 70px;
-// `;
+import NavPopover from "./NavPopover"
 
 const NavButton = styled(Button)`
-    margin: 16px;
-`;
+  margin: 16px;
+`
 
 const NavLink = styled(Link)`
-  &, &:visited, &:hover, &:active {
+  &,
+  &:visited,
+  &:hover,
+  &:active {
     font-style: inherit;
     color: inherit;
     background-color: transparent;
@@ -37,46 +37,51 @@ const NavLink = styled(Link)`
 `
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = React.useState(false)
+
   return (
-    <AppBar position="static" color="default" style={{ height: "110px", padding: "20px 10px" }} position="fixed">
+    <>
+      <AppBar
+        position="static"
+        color="default"
+        style={{ height: "110px" }}
+        position="fixed"
+      >
         <Toolbar style={{ height: "100%" }}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-                <Typography variant="h5">
-                  POD GOLCOWEM
-                </Typography>
+              <Typography variant="h5">POD GOLCOWEM</Typography>
             </Grid>
             <Grid item>
-                <Hidden mdDown>
+              <Hidden mdDown>
                 <NavLink to="/">
-                    <NavButton color="inherit">
-                      STRONA GŁÓWNA
-                    </NavButton>
-                  </NavLink>
-                  <NavLink to="/galeria">
-                    <NavButton color="inherit">
-                      GALERIA
-                    </NavButton>
-                  </NavLink>
-                  <NavLink to="/rezerwacja">
-                    <NavButton color="inherit">
-                      REZERWACJA
-                    </NavButton>
-                  </NavLink>
-                  <NavLink to="/kontakt">
-                    <NavButton color="inherit">
-                      KONTAKT
-                    </NavButton>
-                  </NavLink>
-                </Hidden>
-                <Hidden mdUp>
-                  <IconButton edge="end" color="inherit" aria-label="menu">
-                      <MenuIcon />
-                  </IconButton>
-                </Hidden>
+                  <NavButton color="inherit">STRONA GŁÓWNA</NavButton>
+                </NavLink>
+                <NavLink to="/galeria">
+                  <NavButton color="inherit">GALERIA</NavButton>
+                </NavLink>
+                <NavLink to="/rezerwacja">
+                  <NavButton color="inherit">REZERWACJA</NavButton>
+                </NavLink>
+                <NavLink to="/kontakt">
+                  <NavButton color="inherit">KONTAKT</NavButton>
+                </NavLink>
+              </Hidden>
+              <Hidden mdUp>
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={() => setIsOpen(!isOpen)}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Hidden>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
-  );
+      <NavPopover open={isOpen} handleClose={() => setIsOpen(false)} />
+    </>
+  )
 }

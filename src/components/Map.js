@@ -48,7 +48,7 @@ const CenteredWrapper = styled.div`
 
 function Map() {
   return (
-    <Container class="embed-responsive">
+    <Container className="embed-responsive">
       <Grid container>
         <LeftGrid item xs={12} md={6}>
           <CenteredWrapper>
@@ -75,7 +75,7 @@ function Map() {
         </LeftGrid>
         <Grid item xs={12} md={6}>
           <MapFrame
-          class='embed-responsive-item'
+          className='embed-responsive-item'
           src='https://maps.google.com/maps?q=Domek%20letniskowy%20pod%20golcowem,%20Stara%20wie%C5%9B%20508&t=&z=13&ie=UTF8&iwloc=&output=embed'
           allow='encrypted-media'
           allowfullscreen />

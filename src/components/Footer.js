@@ -81,7 +81,7 @@ function Footer() {
                 <List>
                   <ListItem>Stara Wieś 728, 34-600 Limanowa</ListItem>
                 </List>
-                <SmallTitle variant="subtitle">Telefon Kontaktowy</SmallTitle>
+                <SmallTitle variant="subtitle1">Telefon Kontaktowy</SmallTitle>
                 <div>
                   <PhoneNumber>+(48) 607 514 585</PhoneNumber>
                 </div>

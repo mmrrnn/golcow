@@ -29,6 +29,10 @@ const ResultContainer = styled(Grid)`
   padding-top: 4rem;
 `;
 
+const MarginedGrid = styled(Grid)`
+  margin: 1rem 0;
+`
+
 function Reservation() {
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
@@ -43,7 +47,7 @@ function Reservation() {
       <ReservationBox>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container justify="space-around">
-            <Grid item xs={12} md={4}>
+            <MarginedGrid item xs={12} md={4}>
               <Typography variant="h6">data przyjazdu</Typography>
               <KeyboardDatePicker
                 disableToolbar
@@ -57,8 +61,8 @@ function Reservation() {
                   'aria-label': 'change date',
                 }}
               />
-            </Grid>
-            <Grid item xs={12} md={4}>
+            </MarginedGrid>
+            <MarginedGrid item xs={12} md={4}>
               <Typography variant="h6">data wyjazdu</Typography>
               <KeyboardDatePicker
                 disableToolbar
@@ -72,17 +76,16 @@ function Reservation() {
                   'aria-label': 'change date',
                 }}
               />
-            </Grid>
-            <Grid item xs={12} md={4}>
+            </MarginedGrid>
+            <MarginedGrid item xs={12} md={4}>
               <Typography variant="h6">liczba osob</Typography>
               <TextField
                 defaultValue={4}
                 margin="normal"
                 id="standard-number"
-                label=""
                 type="number"
               />
-            </Grid>
+            </MarginedGrid>
             <ResultContainer item xs={12}>
               <Typography variant="h4">Szacunkowa cena: <b>700,-</b></Typography>
             </ResultContainer>
