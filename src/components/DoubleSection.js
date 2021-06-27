@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { Grid, Typography, useMediaQuery } from "@material-ui/core"
 import { useTheme } from "@material-ui/core/styles"
 
-import mainHeroImage from "../images/mainHeroImage.jpeg"
 import barbequeIcon from "../images/barbeque.svg"
 
 const LeftSection = styled(Grid)`

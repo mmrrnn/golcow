@@ -36,12 +36,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [
-          `Cinzel\:300,400,700`,
-          `Ubuntu\:300,400,700`
-        ],
-        display: 'swap'
-      }
+        fonts: [`Cinzel\:300,400,700`, `Ubuntu\:300,400,700`],
+        display: "swap",
+      },
     },
     {
       resolve: `gatsby-source-contentful`,
@@ -50,5 +47,12 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
+    {
+      resolve: "gatsby-plugin-material-ui",
+      options: {
+        stylesProvider: { injectFirst: true },
+      },
+    },
+    "gatsby-plugin-styled-components",
   ],
 }

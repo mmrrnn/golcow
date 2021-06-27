@@ -1,14 +1,7 @@
 import {
-  AppBar,
   Button,
-  Grid,
-  Hidden,
-  IconButton,
   Popover,
-  Toolbar,
-  Typography,
 } from "@material-ui/core"
-import { Menu as MenuIcon } from "@material-ui/icons"
 import UnstyledLink from '../commons/UnstyledLink';
 import * as React from "react"
 import styled from "styled-components"

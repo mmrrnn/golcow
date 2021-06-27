@@ -24,7 +24,6 @@ export default function Navbar() {
   return (
     <>
       <AppBar
-        position="static"
         color="default"
         style={{ height: "110px" }}
         position="fixed"
