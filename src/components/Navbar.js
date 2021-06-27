@@ -4,36 +4,18 @@ import {
   Grid,
   Hidden,
   IconButton,
-  Popover,
   Toolbar,
   Typography,
 } from "@material-ui/core"
 import { Menu as MenuIcon } from "@material-ui/icons"
-import { Link } from "gatsby"
 import * as React from "react"
 import styled from "styled-components"
 
+import UnstyledLink from '../commons/UnstyledLink';
 import NavPopover from "./NavPopover"
 
 const NavButton = styled(Button)`
   margin: 16px;
-`
-
-const NavLink = styled(Link)`
-  &,
-  &:visited,
-  &:hover,
-  &:active {
-    font-style: inherit;
-    color: inherit;
-    background-color: transparent;
-    font-size: inherit;
-    text-decoration: none;
-    font-variant: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    font-family: inherit;
-  }
 `
 
 export default function Navbar() {
@@ -50,24 +32,24 @@ export default function Navbar() {
         <Toolbar style={{ height: "100%" }}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
-              <NavLink to="/">
+              <UnstyledLink to="/">
                 <Typography variant="h5">POD GOLCOWEM</Typography>
-              </NavLink>
+              </UnstyledLink>
             </Grid>
             <Grid item>
               <Hidden mdDown>
-                <NavLink to="/">
+                <UnstyledLink to="/">
                   <NavButton color="inherit">STRONA GŁÓWNA</NavButton>
-                </NavLink>
-                <NavLink to="/galeria">
+                </UnstyledLink>
+                <UnstyledLink to="/galeria">
                   <NavButton color="inherit">GALERIA</NavButton>
-                </NavLink>
-                <NavLink to="/rezerwacja">
+                </UnstyledLink>
+                <UnstyledLink to="/rezerwacja">
                   <NavButton color="inherit">REZERWACJA</NavButton>
-                </NavLink>
-                <NavLink to="/kontakt">
+                </UnstyledLink>
+                <UnstyledLink to="/kontakt">
                   <NavButton color="inherit">KONTAKT</NavButton>
-                </NavLink>
+                </UnstyledLink>
               </Hidden>
               <Hidden mdUp>
                 <IconButton

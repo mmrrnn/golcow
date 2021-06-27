@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core"
 import { Menu as MenuIcon } from "@material-ui/icons"
-import { Link } from "gatsby"
+import UnstyledLink from '../commons/UnstyledLink';
 import * as React from "react"
 import styled from "styled-components"
 
@@ -17,22 +17,8 @@ const NavButton = styled(Button)`
   margin: 16px;
 `
 
-const NavLink = styled(Link)`
+const NavLink = styled(UnstyledLink)`
   display: block;
-  &,
-  &:visited,
-  &:hover,
-  &:active {
-    font-style: inherit;
-    color: inherit;
-    background-color: transparent;
-    font-size: inherit;
-    text-decoration: none;
-    font-variant: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    font-family: inherit;
-  }
 `
 
 export default function NavPopover({ open, handleClose }) {

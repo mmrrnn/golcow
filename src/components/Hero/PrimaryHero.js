@@ -1,4 +1,5 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
 import {
   Button,
@@ -9,14 +10,12 @@ import {
   useMediaQuery,
 } from "@material-ui/core"
 
-import mainHeroImage from "../../images/mainHeroImage.jpeg"
+const backgroundStyles = 'linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),';
 
 const HeroContainer = styled(Container)`
   height: calc(100vh - 110px);
   padding: 4rem 0;
   color: #fff;
-  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)),
-    url("${mainHeroImage}");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,11 +27,33 @@ const HeroButton = styled(Button)`
 `
 
 function Hero() {
+  const { allContentfulHomeHero: { nodes } } = useStaticQuery(graphql`
+    {
+      allContentfulHomeHero {
+        nodes {
+          buttonContent
+          heroImage {
+            file {
+              url
+            }
+          }
+          title
+        }
+      }
+    }
+  `)
+  const {
+    title,
+    buttonContent,
+    heroImage: {
+      file: { url: heroImage }
+    }
+  } = nodes[0]
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("md"))
 
   return (
-    <HeroContainer maxWidth="xl">
+    <HeroContainer maxWidth="xl" style={{ backgroundImage: `${backgroundStyles} url(${heroImage})` }}>
       <Grid
         container
         alignItems="center"
@@ -42,11 +63,11 @@ function Hero() {
       >
         <Grid item style={{ margin: "2rem" }}>
           <Typography variant={isMobile ? "h3" : "h1"} align="center">
-            Domek pod Golcowem
+            {title}
           </Typography>
         </Grid>
         <Grid item>
-          <HeroButton variant="contained">Sprawdź teraz</HeroButton>
+          <HeroButton variant="contained">{buttonContent}</HeroButton>
         </Grid>
       </Grid>
     </HeroContainer>

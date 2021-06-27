@@ -1,12 +1,7 @@
-import * as React from 'react';
-import styled from 'styled-components';
-import {
-  Hidden,
-  Grid,
-  Typography,
-  useMediaQuery
-} from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import * as React from "react"
+import styled from "styled-components"
+import { Hidden, Grid, Typography, useMediaQuery } from "@material-ui/core"
+import { useTheme } from "@material-ui/core/styles"
 
 const FooterContainer = styled.footer`
   padding: 3rem 0;
@@ -16,7 +11,7 @@ const FooterContainer = styled.footer`
     border-left: 1px solid rgb(104, 97, 94);
     border-right: 1px solid rgb(104, 97, 94);
   }
-`;
+`
 
 const WhiteTitle = styled(Typography)`
   color: white;
@@ -51,52 +46,60 @@ const MiddleContainer = styled(Grid)`
 const List = styled.ul`
   padding: 0;
   list-style: none;
-`;
+`
 
 const ListItem = styled.li`
   margin-top: 1rem;
-  color: ${({ theme }) => theme.palette.whiteGrey}
+  color: ${({ theme }) => theme.palette.whiteGrey};
 `
 
 function Footer() {
-    const theme = useTheme();
-    const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
-    return (
-        <FooterContainer>
-            <WhiteTitle variant="h4" align="center">Pod Golcowem</WhiteTitle>
-            <TripleContainer container justify="center">
-              <Hidden smDown>
-                <Grid item xs={12} sm={4} md={3}>
-                  <WhiteTitle variant="h6">Nawigacja</WhiteTitle>
-                  <List>
-                    <ListItem>Strona Główna</ListItem>
-                    <ListItem>Galeria</ListItem>
-                    <ListItem>Rezerwacja</ListItem>
-                    <ListItem>Kontakt</ListItem>
-                  </List>
-                </Grid>
-              </Hidden>
-              <MiddleContainer item xs={12} sm={4} md={3} className={ isSmall ? '' : 'border' }>
-                <WhiteTitle variant="h6">Informacje</WhiteTitle>
-                <List>
-                  <ListItem>Stara Wieś 728, 34-600 Limanowa</ListItem>
-                </List>
-                <SmallTitle variant="subtitle1">Telefon Kontaktowy</SmallTitle>
-                <div>
-                  <PhoneNumber>+(48) 607 514 585</PhoneNumber>
-                </div>
-              </MiddleContainer>
-              <Grid item xs={12} sm={4} md={3}>
-                <WhiteTitle variant="h6">O nas</WhiteTitle>
-                <List>
-                  <ListItem>Atrakcje</ListItem>
-                  <ListItem>Mapa</ListItem>
-                  <ListItem>Regulamin</ListItem>
-                </List>
-              </Grid>
-            </TripleContainer>
-        </FooterContainer>
-    )
+  const theme = useTheme()
+  const isSmall = useMediaQuery(theme.breakpoints.down("sm"))
+  return (
+    <FooterContainer>
+      <WhiteTitle variant="h4" align="center">
+        Pod Golcowem
+      </WhiteTitle>
+      <TripleContainer container justify="center">
+        <Hidden smDown>
+          <Grid item xs={12} sm={4} md={3}>
+            <WhiteTitle variant="h6">Nawigacja</WhiteTitle>
+            <List>
+              <ListItem>Strona Główna</ListItem>
+              <ListItem>Galeria</ListItem>
+              <ListItem>Rezerwacja</ListItem>
+              <ListItem>Kontakt</ListItem>
+            </List>
+          </Grid>
+        </Hidden>
+        <MiddleContainer
+          item
+          xs={12}
+          sm={4}
+          md={3}
+          className={isSmall ? "" : "border"}
+        >
+          <WhiteTitle variant="h6">Informacje</WhiteTitle>
+          <List>
+            <ListItem>Stara Wieś 728, 34-600 Limanowa</ListItem>
+          </List>
+          <SmallTitle variant="subtitle1">Telefon Kontaktowy</SmallTitle>
+          <div>
+            <PhoneNumber>+(48) 607 514 585</PhoneNumber>
+          </div>
+        </MiddleContainer>
+        <Grid item xs={12} sm={4} md={3}>
+          <WhiteTitle variant="h6">O nas</WhiteTitle>
+          <List>
+            <ListItem>Atrakcje</ListItem>
+            <ListItem>Mapa</ListItem>
+            <ListItem>Regulamin</ListItem>
+          </List>
+        </Grid>
+      </TripleContainer>
+    </FooterContainer>
+  )
 }
 
-export default Footer;
+export default Footer
