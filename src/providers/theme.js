@@ -1,8 +1,8 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles"
 
 const headersStyle = {
   fontFamily: "'Cinzel', 'Helvetica', 'Arial', 'sans-serif'",
-  letterSpacing: 1
+  letterSpacing: 1,
 }
 
 export default createMuiTheme({
@@ -14,11 +14,24 @@ export default createMuiTheme({
     h5: headersStyle,
     h6: headersStyle,
     p: { fontFamily: "'Ubuntu', 'Helvetica', 'Arial', 'sans-serif'" },
-    span: { fontFamily: "'Ubuntu', 'Helvetica', 'Arial', 'sans-serif'" }
+    span: { fontFamily: "'Ubuntu', 'Helvetica', 'Arial', 'sans-serif'" },
   },
   palette: {
-    black: '#423A37',
-    gold: 'rgb(207, 157, 108)',
-    whiteGrey: 'rgb(200, 192, 184)'
-  }
-});
+    black: "#423A37",
+    gold: "rgb(207, 157, 108)",
+    whiteGrey: "rgb(200, 192, 184)",
+  },
+  overrides: {
+    MuiPickersDay: {
+      daySelected: {
+        backgroundColor: "rgb(207, 157, 108)",
+        "&:hover": {
+          backgroundColor: "rgb(207, 157, 108)",
+        },
+      },
+      dayDisabled: {
+        backgroundColor: "rgba(0, 0, 0, 0.1)"
+      },
+    },
+  },
+})

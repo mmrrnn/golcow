@@ -36,7 +36,7 @@ export default function Navbar() {
               </UnstyledLink>
             </Grid>
             <Grid item>
-              <Hidden mdDown>
+              <Hidden smDown>
                 <UnstyledLink to="/">
                   <NavButton color="inherit">STRONA GŁÓWNA</NavButton>
                 </UnstyledLink>

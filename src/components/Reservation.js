@@ -1,5 +1,7 @@
 import * as React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
+import pl from "date-fns/locale/pl"
 import DateFnsUtils from "@date-io/date-fns"
 import {
   MuiPickersUtilsProvider,
@@ -13,6 +15,14 @@ import {
   useMediaQuery,
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/core/styles"
+
+import {
+  formatDate,
+  parseDate,
+  getDates,
+  getTomorrowDate,
+  getYesterdayDate,
+} from "../utils"
 
 const ReservationContainer = styled(Container)`
   text-align: center;
@@ -34,12 +44,36 @@ const MarginedGrid = styled(Grid)`
 `
 
 function Reservation() {
+  const {
+    allContentfulReservationEntity: { nodes },
+  } = useStaticQuery(graphql`
+    {
+      allContentfulReservationEntity {
+        nodes {
+          date {
+            content
+          }
+        }
+      }
+    }
+  `)
   const theme = useTheme()
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"))
-  const [selectedDate, setSelectedDate] = React.useState(new Date())
-  const handleDateChange = date => {
-    setSelectedDate(date)
+  const [startDate, setStartDate] = React.useState(new Date())
+  const [endDate, setEndDate] = React.useState(getTomorrowDate(startDate))
+  const todayDate = new Date();
+  const reservedDays = getDates(nodes).map(formatDate)
+  const disableDate = date => {
+    const parsedDate = parseDate(date)
+    return reservedDays.includes(parsedDate) || date < getYesterdayDate(todayDate);
   }
+  const disableTomorrow = date => {
+    return disableDate(getYesterdayDate(date)) || date < startDate
+  }
+
+  React.useEffect(() => {
+    if (startDate > endDate) setEndDate(getTomorrowDate(startDate));
+  }, [startDate]);
 
   return (
     <ReservationContainer>
@@ -47,21 +81,22 @@ function Reservation() {
         Sprawdź dostępność
       </Typography>
       <ReservationBox>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
           <Grid container justify="space-around">
             <MarginedGrid item xs={12} md={4}>
               <Typography variant="h6">data przyjazdu</Typography>
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="dd/MM/yyyy"
                 margin="normal"
-                id="date-picker-inline"
-                value={selectedDate}
-                onChange={handleDateChange}
+                id="date-picker-arrival"
+                value={startDate}
+                onChange={setStartDate}
                 KeyboardButtonProps={{
-                  "aria-label": "change date",
+                  "aria-label": "arrival date",
                 }}
+                shouldDisableDate={disableDate}
               />
             </MarginedGrid>
             <MarginedGrid item xs={12} md={4}>
@@ -69,18 +104,19 @@ function Reservation() {
               <KeyboardDatePicker
                 disableToolbar
                 variant="inline"
-                format="MM/dd/yyyy"
+                format="dd/MM/yyyy"
                 margin="normal"
-                id="date-picker-inline"
-                value={selectedDate}
-                onChange={handleDateChange}
+                id="date-picker-departure"
+                value={endDate}
+                onChange={setEndDate}
                 KeyboardButtonProps={{
-                  "aria-label": "change date",
+                  "aria-label": "departure date",
                 }}
+                shouldDisableDate={disableTomorrow}
               />
             </MarginedGrid>
             <MarginedGrid item xs={12} md={4}>
-              <Typography variant="h6">liczba osob</Typography>
+              <Typography variant="h6">liczba osób</Typography>
               <TextField
                 defaultValue={4}
                 margin="normal"
