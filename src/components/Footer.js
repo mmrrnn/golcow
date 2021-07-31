@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { Hidden, Grid, Typography, useMediaQuery } from "@material-ui/core"
 import { useTheme } from "@material-ui/core/styles"
 
+import UnstyledLink from '../commons/UnstyledLink';
+
 const FooterContainer = styled.footer`
   padding: 3rem 0;
   text-align: center;
@@ -66,10 +68,18 @@ function Footer() {
           <Grid item xs={12} sm={4} md={3}>
             <WhiteTitle variant="h6">Nawigacja</WhiteTitle>
             <List>
-              <ListItem>Strona Główna</ListItem>
-              <ListItem>Galeria</ListItem>
-              <ListItem>Rezerwacja</ListItem>
-              <ListItem>Kontakt</ListItem>
+              <UnstyledLink to="/">
+                <ListItem>Strona Główna</ListItem>
+              </UnstyledLink>
+              <UnstyledLink to="/galeria">
+                <ListItem>Galeria</ListItem>
+              </UnstyledLink>
+              <UnstyledLink to="/rezerwacja">
+                <ListItem>Rezerwacja</ListItem>
+              </UnstyledLink>
+              <UnstyledLink to="/kontakt">
+                <ListItem>Kontakt</ListItem>
+              </UnstyledLink>
             </List>
           </Grid>
         </Hidden>
@@ -92,9 +102,15 @@ function Footer() {
         <Grid item xs={12} sm={4} md={3}>
           <WhiteTitle variant="h6">O nas</WhiteTitle>
           <List>
-            <ListItem>Atrakcje</ListItem>
-            <ListItem>Mapa</ListItem>
-            <ListItem>Regulamin</ListItem>
+            <UnstyledLink to="/#atrakcje">
+              <ListItem>Atrakcje</ListItem>
+            </UnstyledLink>
+            <UnstyledLink to="/kontakt">
+              <ListItem>Kontakt</ListItem>
+            </UnstyledLink>
+            <UnstyledLink to="/regulamin">
+              <ListItem>Regulamin</ListItem>
+            </UnstyledLink>
           </List>
         </Grid>
       </TripleContainer>

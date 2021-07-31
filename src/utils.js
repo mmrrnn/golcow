@@ -1,4 +1,4 @@
-const day = 24 * 60 * 60 * 1000
+export const dayInMS = 24 * 60 * 60 * 1000
 
 export const formatDate = dateString => {
   return dateString
@@ -20,9 +20,9 @@ export const getDates = nodes => {
 }
 
 export const getTomorrowDate = date => {
-  return new Date(date.getTime() + day)
+  return new Date(date.getTime() + dayInMS)
 }
 
 export const getYesterdayDate = date => {
-  return new Date(date.getTime() - day)
+  return new Date(date.getTime() - dayInMS)
 }

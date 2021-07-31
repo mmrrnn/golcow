@@ -13,7 +13,7 @@ function BottomSection() {
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"))
 
   return (
-    <BottomSectionContainer>
+    <BottomSectionContainer id="atrakcje">
       <Typography variant={isSmall ? "h3" : "h2"}>
         Atrakcje w poblizu
       </Typography>
