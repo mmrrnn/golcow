@@ -26,15 +26,18 @@ function SmallHero({ title }) {
       data-sal-duration="1000"
       data-sal-easing="ease"
     >
-      <Typography
-        style={{ color: "white" }}
-        variant={isMobile ? "h4" : "h2"}
+      <div
         data-sal="slide-down"
         data-sal-duration="1400"
         data-sal-easing="ease"
       >
-        {title}
-      </Typography>
+        <Typography
+          style={{ color: "white" }}
+          variant={isMobile ? "h4" : "h2"}
+        >
+          {title}
+        </Typography>
+      </div>
     </HeroContainer>
   )
 }
