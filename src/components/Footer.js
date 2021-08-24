@@ -92,7 +92,7 @@ function Footer() {
         >
           <WhiteTitle variant="h6">Informacje</WhiteTitle>
           <List>
-            <ListItem>Stara Wieś 728, 34-600 Limanowa</ListItem>
+            <ListItem>Stara Wieś 508, 34-600 Limanowa</ListItem>
           </List>
           <SmallTitle variant="subtitle1">Telefon Kontaktowy</SmallTitle>
           <div>

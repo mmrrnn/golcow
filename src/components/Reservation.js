@@ -8,6 +8,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers"
 import {
+  Avatar,
   Grid,
   Container,
   Typography,
@@ -44,6 +45,17 @@ const MarginedGrid = styled(Grid)`
   margin: 1rem 0;
 `
 
+const StepsContainer = styled.div`
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+`;
+
+const StepAvatar = styled(Avatar)`
+  margin-right: 1rem;
+  background-color: rgb(207, 157, 108);
+`;
+
 function Reservation() {
   const {
     allContentfulReservationEntity: { nodes },
@@ -63,114 +75,165 @@ function Reservation() {
   const [startDate, setStartDate] = React.useState(new Date())
   const [endDate, setEndDate] = React.useState(getTomorrowDate(startDate))
   const [guests, setGuests] = React.useState(2)
-  const [price, setPrice] = React.useState(null);
-  const todayDate = new Date();
+  const [price, setPrice] = React.useState(null)
+  const todayDate = new Date()
   const reservedDays = getDates(nodes).map(formatDate)
   const disableDate = date => {
     const parsedDate = parseDate(date)
-    return reservedDays.includes(parsedDate) || date < getYesterdayDate(todayDate);
+    return (
+      reservedDays.includes(parsedDate) || date < getYesterdayDate(todayDate)
+    )
   }
   const disableTomorrow = date => {
     return disableDate(getYesterdayDate(date)) || date < startDate
   }
-  const handleGuestsChange = (event) => {
-    const value = event.target.valueAsNumber;
-    if (value && value < 7) setGuests(value);
-  };
+  const handleGuestsChange = event => {
+    const value = event.target.valueAsNumber
+    setGuests(value)
+  }
 
   React.useEffect(() => {
-    if (startDate > endDate) setEndDate(getTomorrowDate(startDate));
-  }, [startDate]);
+    if (guests > 6) setGuests(6)
+    if (guests < 2) setGuests(2)
+  }, [guests])
 
   React.useEffect(() => {
-    const days = Math.round((endDate.getTime() - startDate.getTime()) / dayInMS);
-    let priceSum = 0;
-    for(let i = 0; i < days; i++) {
-      // get next "i" booked date
-      const day = new Date(startDate.getTime() + i * dayInMS);
-      if (day.getDay() === 5) {
-        // friday - saturday
-        priceSum += 400
-      } else if (day.getDay() === 6 && i) {
-        // saturday - sunday when friday either
-        priceSum += 300
-      } else if (day.getDay() === 6 && !i) {
-        // saturday - sunday without friday
-        priceSum += 500;
-      } else if (guests < 5) {
-        priceSum += 240;
-      } else if (guests === 5) {
-        priceSum += 300;
-      } else if (guests > 5) {
-        priceSum += 350;
+    if (startDate > endDate) setEndDate(getTomorrowDate(startDate))
+  }, [startDate, endDate])
+
+  React.useEffect(() => {
+    const days = Math.round((endDate.getTime() - startDate.getTime()) / dayInMS)
+
+    if (days === 1) {
+      if (startDate.getDay() === 5) {
+        setPrice(400)
+        return
+      }
+      if (startDate.getDay() === 6) {
+        setPrice(500)
+        return
       }
     }
-    setPrice(priceSum);
+    if (days === 2) {
+      if (startDate.getDay() === 5) {
+        setPrice(700)
+        return
+      }
+      if (startDate.getDay() === 6) {
+        setPrice(600)
+        return
+      }
+    }
+    if (guests < 5) {
+      setPrice(240 * days)
+    } else if (guests === 5) {
+      setPrice(300 * days)
+    } else {
+      setPrice(350 * days)
+    }
   }, [startDate, endDate, guests])
 
   return (
-    <ReservationContainer>
-      <Typography variant={isSmall ? "h3" : "h2"}>
-        Sprawdź dostępność
-      </Typography>
-      <ReservationBox>
-        <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
-          <Grid container justify="space-around">
-            <MarginedGrid item xs={12} md={4}>
-              <Typography variant="h6">data przyjazdu</Typography>
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-arrival"
-                value={startDate}
-                onChange={setStartDate}
-                KeyboardButtonProps={{
-                  "aria-label": "arrival date",
-                }}
-                shouldDisableDate={disableDate}
-              />
-            </MarginedGrid>
-            <MarginedGrid item xs={12} md={4}>
-              <Typography variant="h6">data wyjazdu</Typography>
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="dd/MM/yyyy"
-                margin="normal"
-                id="date-picker-departure"
-                value={endDate}
-                onChange={setEndDate}
-                KeyboardButtonProps={{
-                  "aria-label": "departure date",
-                }}
-                shouldDisableDate={disableTomorrow}
-              />
-            </MarginedGrid>
-            <MarginedGrid item xs={12} md={4}>
-              <Typography variant="h6">liczba osób</Typography>
-              <TextField
-                value={guests}
-                onChange={handleGuestsChange}
-                margin="normal"
-                id="standard-number"
-                type="number"
-                inputProps={{
-                  min: 1,
-                  max: 6,
-                }}
-              />
-            </MarginedGrid>
-            <ResultContainer item xs={12}>
-              <Typography variant="h4">
-                Szacunkowa cena: <b>{price},-</b>
-              </Typography>
-            </ResultContainer>
-          </Grid>
-        </MuiPickersUtilsProvider>
-      </ReservationBox>
-    </ReservationContainer>
+    <>
+      <ReservationContainer>
+        <Typography variant={isSmall ? "h3" : "h2"}>
+          Sprawdź dostępność
+        </Typography>
+        <ReservationBox>
+          <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
+            <Grid container justify="space-around">
+              <MarginedGrid item xs={12} md={4}>
+                <Typography variant="h6">data przyjazdu</Typography>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-arrival"
+                  value={startDate}
+                  onChange={setStartDate}
+                  KeyboardButtonProps={{
+                    "aria-label": "arrival date",
+                  }}
+                  shouldDisableDate={disableDate}
+                />
+              </MarginedGrid>
+              <MarginedGrid item xs={12} md={4}>
+                <Typography variant="h6">data wyjazdu</Typography>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-departure"
+                  value={endDate}
+                  onChange={setEndDate}
+                  KeyboardButtonProps={{
+                    "aria-label": "departure date",
+                  }}
+                  shouldDisableDate={disableTomorrow}
+                />
+              </MarginedGrid>
+              <MarginedGrid item xs={12} md={4}>
+                <Typography variant="h6">liczba osób</Typography>
+                <TextField
+                  value={guests}
+                  onChange={handleGuestsChange}
+                  margin="normal"
+                  id="standard-number"
+                  type="number"
+                />
+              </MarginedGrid>
+              <ResultContainer item xs={12}>
+                {!!guests && (
+                  <Typography variant="h4">
+                    Szacunkowa cena: <b>{price},- *</b>
+                  </Typography>
+                )}
+              </ResultContainer>
+            </Grid>
+          </MuiPickersUtilsProvider>
+          <ul align="left">
+            <li>
+              * Podana cena jest szacunkowa. Dokładna cena zostanie uzgodniona
+              telefonicznie.
+            </li>
+            <li>
+              Doba hotelowa od 15 w dniu przyjazdu do 11 w dniu wyjazdu – jeśli
+              najmujący chciałby przedłużyć dobę np. do 19.00 w dniu wyjazdu –
+              opłata 100 zł
+            </li>
+            <li>
+              Pobierana jest zaliczka w wysokości 30% całkowitej ceny wynajmu.
+            </li>
+            <li>Pobierana kaucja w wysokości 200 zł.</li>
+            <li>
+              W okresie zimowym październik - luty dodatkowa opłata za
+              ogrzewanie 2zł - 1 kWh.
+            </li>
+          </ul>
+        </ReservationBox>
+        <Container maxWidth="sm">
+          <Typography variant="h4" align="center">Jak dokonać rezerwacji?</Typography>
+          <StepsContainer>
+            <StepAvatar>1</StepAvatar>
+            <Typography variant="subtitle1" align="left">Sprawdź dostępność terminu.</Typography>
+          </StepsContainer>
+          <StepsContainer>
+            <StepAvatar>2</StepAvatar>
+            <Typography variant="subtitle1" align="left">Wykonaj telefon na numer <b>607 514 585</b> lub kontaktuj się mailowo.</Typography>
+          </StepsContainer>
+          <StepsContainer>
+            <StepAvatar>3</StepAvatar>
+            <Typography variant="subtitle1" align="left">Dokonaj rezerwacji poprzez wpłacenie zaliczki.</Typography>
+          </StepsContainer>
+          <StepsContainer>
+            <StepAvatar>4</StepAvatar>
+            <Typography variant="subtitle1" align="left">Ciesz się swoim urlopem w zaciszu malowniczych gór.</Typography>
+          </StepsContainer>
+        </Container>
+      </ReservationContainer>
+    </>
   )
 }
 

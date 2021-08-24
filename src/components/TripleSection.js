@@ -58,21 +58,42 @@ function TopSection() {
   return (
     <TopSectionContainer>
       <Grid container justify="space-around" align-items="center">
-        <SpacedGrid item xs={12} sm={3}>
+        <SpacedGrid
+          item
+          xs={12}
+          sm={3}
+          data-sal="slide-down"
+          data-sal-duration="600"
+          data-sal-easing="ease"
+        >
           <Icon src={familyIcon} alt="family" />
           <Header variant="h5">
             <b>{firstTitle}</b>
           </Header>
           <Subtitle variant="subtitle1">{firstDescription}</Subtitle>
         </SpacedGrid>
-        <SpacedGrid item xs={12} sm={3}>
+        <SpacedGrid
+          item
+          xs={12}
+          sm={3}
+          data-sal="slide-up"
+          data-sal-duration="600"
+          data-sal-easing="ease"
+        >
           <Icon src={treesIcon} alt="trees" />
           <Header variant="h5">
             <b>{secondTitle}</b>
           </Header>
           <Subtitle variant="subtitle1">{secondDescription}</Subtitle>
         </SpacedGrid>
-        <SpacedGrid item xs={12} sm={3}>
+        <SpacedGrid
+          item
+          xs={12}
+          sm={3}
+          data-sal="slide-down"
+          data-sal-duration="600"
+          data-sal-easing="ease"
+        >
           <Icon src={sunbathingIcon} alt="sunbathing" />
           <Header variant="h5">
             <b>{thirdTitle}</b>

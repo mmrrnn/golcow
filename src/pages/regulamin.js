@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Typography, Container } from "@material-ui/core"
 
+import Seo from "../components/seo"
 import Layout from "../components/layout"
 import SecondaryHero from "../components/Hero/SecondaryHero"
 
@@ -12,6 +13,7 @@ const StatuteContainer = styled(Container)`
 function Regulamin() {
   return (
     <Layout>
+      <Seo title="Regulamin" />
       <SecondaryHero title="Regulamin" />
       <StatuteContainer>
         <Typography variant="h4" align="center">Informacje wstępne</Typography>

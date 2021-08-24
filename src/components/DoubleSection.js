@@ -5,6 +5,11 @@ import { Grid, Typography, useMediaQuery } from "@material-ui/core"
 import { useTheme } from "@material-ui/core/styles"
 
 import barbequeIcon from "../images/barbeque.svg"
+import trackIcon from "../images/track.svg"
+import arborIcon from "../images/arbor.svg"
+import cutleryIcon from "../images/cutlery.svg"
+import hikingIcon from "../images/hiking.svg"
+import skiIcon from "../images/ski.svg"
 
 const LeftSection = styled(Grid)`
   min-height: 460px;
@@ -100,34 +105,52 @@ function DoubleSection() {
 
   return (
     <Grid container>
-      <LeftSection item xs={12} md={6} style={{ backgroundImage: `url(${bgUrl})` }} />
+      <LeftSection
+        item
+        xs={12} md={6}
+        style={{ backgroundImage: `url(${bgUrl})` }}
+        data-sal="zoom"
+        data-sal-duration="1000"
+        data-sal-easing="ease"
+      />
       <RightSection item xs={12} md={6}>
-        <Title variant={isSmall ? "h4" : "h3"}>{title}</Title>
-        <Subtitle variant="subtitle1">{subtitle}</Subtitle>
-        <Paragraph paragraph>{description}</Paragraph>
-        <Grid container>
+        <div
+          data-sal="slide-left"
+          data-sal-duration="400"
+          data-sal-easing="ease"
+        >
+          <Title variant={isSmall ? "h4" : "h3"}>{title}</Title>
+          <Subtitle variant="subtitle1">{subtitle}</Subtitle>
+          <Paragraph paragraph>{description}</Paragraph>
+        </div>
+        <Grid
+          container
+          data-sal="slide-left"
+          data-sal-duration="800"
+          data-sal-easing="ease"
+        >
           <IconSection item xs={12} sm={6}>
             <Icon src={barbequeIcon} />
             <IconHeader variant="subtitle2">{icon1}</IconHeader>
           </IconSection>
           <IconSection item xs={12} sm={6}>
-            <Icon src={barbequeIcon} />
+            <Icon src={arborIcon} />
             <IconHeader variant="subtitle2">{icon2}</IconHeader>
           </IconSection>
           <IconSection item xs={12} sm={6}>
-            <Icon src={barbequeIcon} />
+            <Icon src={trackIcon} />
             <IconHeader variant="subtitle2">{icon3}</IconHeader>
           </IconSection>
           <IconSection item xs={12} sm={6}>
-            <Icon src={barbequeIcon} />
+            <Icon src={cutleryIcon} />
             <IconHeader variant="subtitle2">{icon4}</IconHeader>
           </IconSection>
           <IconSection item xs={12} sm={6}>
-            <Icon src={barbequeIcon} />
+            <Icon src={hikingIcon} />
             <IconHeader variant="subtitle2">{icon5}</IconHeader>
           </IconSection>
           <IconSection item xs={12} sm={6}>
-            <Icon src={barbequeIcon} />
+            <Icon src={skiIcon} />
             <IconHeader variant="subtitle2">{icon6}</IconHeader>
           </IconSection>
         </Grid>

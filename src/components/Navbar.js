@@ -27,12 +27,23 @@ export default function Navbar() {
         color="default"
         style={{ height: "110px" }}
         position="fixed"
+        data-sal="slide-up"
+        data-sal-duration="300"
+        data-sal-easing="ease"
       >
         <Toolbar style={{ height: "100%" }}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <UnstyledLink to="/">
-                <Typography variant="h5">POD GOLCOWEM</Typography>
+                <Typography
+                  variant="h5"
+                  data-sal="slide-left"
+                  data-sal-delay="300"
+                  data-sal-duration="400"
+                  data-sal-easing="ease"
+                >
+                  POD GOLCOWEM
+                </Typography>
               </UnstyledLink>
             </Grid>
             <Grid item>
